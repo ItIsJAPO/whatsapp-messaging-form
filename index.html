@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Send WhatsApp Message</h1>
+    <form id="whatsappForm">
+        <label for="numero">Phone Number (including country code):</label>
+        <input type="tel" id="numero" pattern="\d+" required value="52">
+        <label for="mensaje">Message (optional):</label>
+        <textarea id="mensaje" rows="4"></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const numero = encodeURIComponent(document.getElementById('numero').value.trim());
+            const mensaje = encodeURIComponent(document.getElementById('mensaje').value.trim());
+            const enlace = `https://api.whatsapp.com/send?phone=${numero}&text=${mensaje}`;
+            window.open(enlace, '_blank');
+        });
+    </script>
+</body>
+</html>
